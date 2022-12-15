@@ -20,8 +20,10 @@ app.use(cors())
 
 const url = process.env.URL
 
-
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log("connected to db"))
+const PORT = process.env.PORT || 5000
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+        .then(()=> app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+        .catch((error)=> console.log(error.message))
         
 
 
@@ -125,7 +127,7 @@ app.post('/deleteData', (req, res)=>{
 
 
 
-const PORT = 5000
-app.listen(PORT, (err)=>{
-    if(!err) console.log("server is running at port 5000");
-})
+
+// app.listen(PORT, (err)=>{
+//     if(!err) console.log("server is running at port 5000");
+// })
